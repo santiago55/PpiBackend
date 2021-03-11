@@ -7,7 +7,7 @@ let Ingreso = require('../models/ingresoModels');
 
 app.get('/ingresos/:id', (req, res) => {
     let id = req.params.id;
-    Ingreso.find({usuario: id}, (err, ingresoBD) => {
+    Ingreso.find({ usuario: id }, (err, ingresoBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -51,19 +51,19 @@ app.put('/ingresos/:id', (req, res) => {
     let id = req.params.id;
     let body = req.body;
 
-        Ingreso.findByIdAndUpdate(id, body, (err, ingresoBD) => {
-            if (err) {
-                return res.status(500).json({
-                    ok: false,
-                    err
-                });
-            }
-            res.status(200).json({
-                ok: true,
-                ingresoBD
+    Ingreso.findByIdAndUpdate(id, body, (err, ingresoBD) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
             });
+        }
+        res.status(200).json({
+            ok: true,
+            ingresoBD
         });
     });
+});
 
 app.delete('/ingresos/:id', [validarToken], (req, res) => {
     let id = req.params.id;
