@@ -15,8 +15,10 @@ app.use(require('./routes/index'));
 app.listen(process.env.PORT, () => {
     console.log(`Conectado al puerto ${process.env.PORT}`);
 });
+//Conexion local
+//mongodb://localhost:27017/PPI
 
-mongoose.connect('mongodb://localhost:27017/PPI', {
+mongoose.connect('mongodb+srv://admin:admin@cluster0-gzppv.mongodb.net/FINANZAS', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true
