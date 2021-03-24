@@ -26,19 +26,23 @@ app.post('/login', (req, res) => {
                 message: 'Usuario o contraseña incorrectos'
             });
         }
-        let token = jwt.sign({
-            data: usuarioBD
-        }, process.env.SEED, { expiresIn: process.env.TOKEN });
-        res.status(200).json({
-            ok: true,
-            usuario: usuarioBD,
-            message: 'Ha iniciado sesion exitosamente',
-            token
-        });
+        if (usuarioBD.status === 'Activo') {
+            let token = jwt.sign({
+                data: usuarioBD
+            }, process.env.SEED, { expiresIn: process.env.TOKEN });
+            res.status(200).json({
+                ok: true,
+                usuario: usuarioBD,
+                message: 'Ha iniciado sesion exitosamente',
+                token
+            });
+        } else {
+            return res.status(401).json({
+                ok: false,
+                message: 'El usuario no esta activo'
+            });
+        }
     });
 });
 
 module.exports = app;
-
-
-

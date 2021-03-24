@@ -38,3 +38,4 @@ app.get('/tipo', (req, res) => {
 });
 
 module.exports = app;
+
