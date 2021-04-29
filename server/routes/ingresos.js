@@ -21,6 +21,22 @@ app.get('/ingresos/:id', (req, res) => {
     });
 });
 
+// app.get('/ingresos/:fechaIn', (req, res) => {
+//     let fechaIn = req.params.date;
+//     Ingreso.find({ usuario: id }, (err, ingresoBD) => {
+//         if (err) {
+//             return res.status(500).json({
+//                 ok: false,
+//                 err
+//             });
+//         }
+//         res.status(200).json({
+//             ok: true,
+//             ingresoBD
+//         });
+//     });
+// });
+
 app.post('/ingresos', [validarToken], async (req, res) => {
     let body = req.body;
 
