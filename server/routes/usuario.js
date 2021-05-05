@@ -1,10 +1,11 @@
 const express = require('express');
 const app = express();
 const Usuario = require('../models/userModels');
-const {validarToken} = require('../middlewares/token');
-
+const { v4: uuidv4 } = require('uuid');
+const { getToken, getTokenData } = require('../middlewares/tokenEmail');
+const { getTemplate, sendEmail } = require('../middlewares/emailConfig');
 //Crear usuario
-app.get('/user',(req, res) => {
+app.get('/user', (req, res) => {
     Usuario.find({}, (err, usuarioBD) => {
         if (err) {
             return res.status(500).json({
@@ -29,19 +30,60 @@ app.post('/user', (req, res) => {
         userName: body.userName,
         password: body.password
     });
+    let mailed = user.email;
+    const code = uuidv4();
+    const token = getToken({ mailed, code });
+    const template = getTemplate(user.nombre, token);
 
-    user.save((err, usuarioDB) => {
+    user.save(async (err, usuarioDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
                 err
             });
         }
+        await sendEmail(mailed, 'Email de prueba', template);
         res.status(200).json({
             ok: true,
             user: usuarioDB
         });
     });
+});
+
+//Confirmar usuario
+app.get('/user/confirm/:token', async (req, res) => {
+    try {
+        const { token } = req.params;
+        const data = await getTokenData(token);
+        //console.log(data)
+        if (!data) {
+            return res.status(500).json({
+                ok: false,
+                message: 'Error al obtener la data'
+            });
+        }
+        const { mailed } = data.data;
+
+        Usuario.findOne({ email: mailed }, (err, usuarioBD) => {
+            if (err) {
+                return res.status(401).json({
+                    ok: false,
+                    message: 'Usuario no existe'
+                });
+            }
+            usuarioBD.status = 'Activo';
+            usuarioBD.save();
+            res.status(200).json({
+                ok:true,
+                message:'Usuario Confirmado'
+            });
+        });
+
+
+
+    } catch (err) {
+        console.log(err);
+    }
 });
 
 //Actualizar Usuario

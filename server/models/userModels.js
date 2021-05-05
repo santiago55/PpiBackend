@@ -24,6 +24,11 @@ let UsuarioSchema = new Schema({
     password:{
         type:String,
         required:[true, 'La contraseña es requerida']
+    },
+    status:{
+        type:String,
+        required:true,
+        default:'Inactive'
     }
 });
 
