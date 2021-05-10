@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(bodyParser.json());
 app.use(cors());
-    
+app.use(express.static('./public'));
 app.use(require('./routes/index'));
 
 app.listen(process.env.PORT, () => {

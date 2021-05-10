@@ -13,6 +13,9 @@ let transporter = nodemailer.createTransport({
         user: email.user,
         pass: email.pass,
     },
+    tls: {
+        rejectUnauthorized: false
+    }
 });
 
 const sendEmail = async (mail, asunto, html) => {
