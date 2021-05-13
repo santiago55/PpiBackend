@@ -73,10 +73,7 @@ app.get('/user/confirm/:token', async (req, res) => {
             }
             usuarioBD.status = 'Activo';
             usuarioBD.save();
-            res.status(200).json({
-                ok:true,
-                message:'Usuario Confirmado'
-            });
+            return res.redirect('/confirm.html');
         });
 
 
