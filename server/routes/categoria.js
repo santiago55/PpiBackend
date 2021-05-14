@@ -5,7 +5,7 @@ const Categoria = require('../models/categoryModels');
 
 
 app.get('/categoria', [validarToken], (req, res) => {
-    Categoria.find({ usuario: req.data._id }, (err, categoriaBD) => {
+    Categoria.find({ }, (err, categoriaBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
