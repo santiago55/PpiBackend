@@ -7,5 +7,6 @@ app.use(require('./categoria'));
 app.use(require('./tipo'));
 app.use(require('./ingresos'));
 app.use(require('./egresos'));
+app.use(require('./ahorro'));
 
 module.exports = app;
