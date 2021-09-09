@@ -1,13 +1,13 @@
 const express = require('express');
 const app = express();
 let { validarToken } = require('../middlewares/token');
-let Ingreso = require('../models/ingresoModels');
+let ahorro = require('../models/ahorroModels');
 
-//Crear ingresos
+//Crear ahorros
 
-app.get('/ingresos/:id', (req, res) => {
+app.get('/ahorros/:id', (req, res) => {
     let id = req.params.id;
-    Ingreso.find({ usuario: id }, (err, ingresoBD) => {
+    ahorro.find({ usuario: id }, (err, ahorroBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -16,14 +16,14 @@ app.get('/ingresos/:id', (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            ingresoBD
+            ahorroBD
         });
     });
 });
 
-// app.get('/ingresos/:fechaIn', (req, res) => {
+// app.get('/ahorros/:fechaIn', (req, res) => {
 //     let fechaIn = req.params.date;
-//     Ingreso.find({ usuario: id }, (err, ingresoBD) => {
+//     ahorro.find({ usuario: id }, (err, ahorroBD) => {
 //         if (err) {
 //             return res.status(500).json({
 //                 ok: false,
@@ -32,42 +32,43 @@ app.get('/ingresos/:id', (req, res) => {
 //         }
 //         res.status(200).json({
 //             ok: true,
-//             ingresoBD
+//             ahorroBD
 //         });
 //     });
 // });
 
-app.post('/ingresos', [validarToken], async (req, res) => {
+app.post('/ahorros', [validarToken], async (req, res) => {
     let body = req.body;
 
-    let ingreso = new Ingreso({
+    let ahorros = new ahorro({
         descripcion: body.descripcion,
         valor: body.valor,
-        tipo: body.tipo,
+        categoria: body.categoria,
         date: body.date,
         usuario: req.data._id
     });
 
-    ingreso.save((err, ingresoBD) => {
+    ahorros.save((err, ahorroBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
-                err
+                err, 
+                message:'Error al guardar'
             });
         }
         res.status(200).json({
             ok: true,
-            ingresoBD
+            ahorroBD
         });
     });
 });
 
 
-app.put('/ingresos/:id', (req, res) => {
+app.put('/ahorros/:id', (req, res) => {
     let id = req.params.id;
     let body = req.body;
 
-    Ingreso.findByIdAndUpdate(id, body, (err, ingresoBD) => {
+    ahorro.findByIdAndUpdate(id, body, (err, ahorroBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -76,14 +77,14 @@ app.put('/ingresos/:id', (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            ingresoBD
+            ahorroBD
         });
     });
 });
 
-app.delete('/ingresos/:id', [validarToken], (req, res) => {
+app.delete('/ahorros/:id', [validarToken], (req, res) => {
     let id = req.params.id;
-    Ingreso.findByIdAndDelete(id, (err, ingresoBD) => {
+    ahorro.findByIdAndDelete(id, (err, ahorroBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,
@@ -92,8 +93,8 @@ app.delete('/ingresos/:id', [validarToken], (req, res) => {
         }
         res.status(200).json({
             ok: true,
-            ingresoBD,
-            message: 'Ingreso eliminado'
+            ahorroBD,
+            message: 'ahorro eliminado'
         });
     });
 });
