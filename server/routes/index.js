@@ -8,5 +8,6 @@ app.use(require('./tipo'));
 app.use(require('./ingresos'));
 app.use(require('./egresos'));
 app.use(require('./ahorro'));
+app.use(require('./tipocredito'));
 
 module.exports = app;
