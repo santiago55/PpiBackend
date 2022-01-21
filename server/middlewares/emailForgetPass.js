@@ -3,7 +3,6 @@ const email = {
     user: 'financecontrolppi@gmail.com',
     pass: '12345ppi'
 };
-
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     host: "smtp.gmail.com",
