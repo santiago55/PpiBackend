@@ -29,16 +29,16 @@ app.get('/Detalle/:id', (req, res) => {
 //Crear Detalle
 app.post('/Detalle', [validarToken], async (req, res) => {
     let body = req.body;
-    let Detalle = new Detalle({
+    let detalle = new Detalle({
         nroCuotas: body.nroCuotas,
         valor: body.valor,
         fechaCuota: body.fechaCuota,
         descripcion: body.descripcion,
         estado: body.estado,
-        idCredito: req.data._id
+        idCredito: body.idCredito
     });
 
-    Detalle.save((err, detallecreditosBD) => {
+    detalle.save((err, detallecreditosBD) => {
         if (err) {
             return res.status(500).json({
                 ok: false,

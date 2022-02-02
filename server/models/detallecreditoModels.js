@@ -14,7 +14,7 @@ let detalleCreditoSchema = Schema({
     },
    
     fechaCuota: {
-        type: Date,
+        type: String,
         required: [true, 'la fecha es necesaria']
     },
     
@@ -26,7 +26,7 @@ let detalleCreditoSchema = Schema({
         required: [true, 'El estado es requerido']
     },
     idCredito: {
-        type: Schema.Types.ObjectId, ref: 'Creditos'
+        type: Schema.Types.ObjectId, ref: 'idCredito'
     }
 });
 
