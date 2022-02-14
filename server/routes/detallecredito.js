@@ -26,6 +26,40 @@ app.get('/Detalle/:id', (req, res) => {
     });
 });
 
+app.post('/recordatorio', (req, res) => {
+
+    let body = req.body;
+
+    Usuario.findOne({ email: body.email }, async (err, usuarioUpdate) => {
+        if (err) {
+            return res.status(500).json({
+                ok: false,
+                err
+            })
+        }
+
+        if (!usuarioUpdate) {
+            return res.status(400).json({
+                ok: false,
+                message: 'El email no se encuentra registrado'
+            });
+        }
+        let mailed = usuarioUpdate.email;
+        const code = uuidv4();
+        const token = getToken({ mailed, code });
+        const template = getTemplateForgetPass(usuarioUpdate.nombre, token);
+        await sendEmailForgetPass(mailed, 'Recuperar contraseña', template);
+        return res.status(200).json({
+            ok: true,
+            usuarioUpdate
+        });
+
+    });
+
+
+});
+
+
 //Crear Detalle
 app.post('/Detalle', [validarToken], async (req, res) => {
     let body = req.body;
