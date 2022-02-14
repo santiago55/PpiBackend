@@ -11,5 +11,6 @@ app.use(require('./ahorro'));
 app.use(require('./tipocredito'));
 app.use(require('./credito'));
 app.use(require('./detallecredito'));
+app.use(require('./categoriaIng'));
 
 module.exports = app;

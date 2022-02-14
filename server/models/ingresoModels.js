@@ -13,6 +13,10 @@ let ingresoSchema = Schema({
     tipo: {
         type: String
     },
+    categoria: {
+        type: String
+
+    },
     date: {
         type: Date,
         required: [true, 'la fecha es necesaria']

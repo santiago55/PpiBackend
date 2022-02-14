@@ -44,6 +44,7 @@ app.post('/ingresos', [validarToken], async (req, res) => {
         descripcion: body.descripcion,
         valor: body.valor,
         tipo: body.tipo,
+        categoria:body.categoria,
         date: body.date,
         usuario: req.data._id
     });

@@ -24,7 +24,7 @@ const sendEmailForgetPass = async (mail, asunto, html) => {
             to: mail, // list of receivers
             subject: asunto, // Subject line
             text: "Hola por favor confirma tu cuenta", // plain text body
-            html, // html body
+            html, 
         });
     } catch (error) {
         console.log("Error al enviar el correo" + error);
