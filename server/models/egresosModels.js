@@ -5,7 +5,6 @@ let Schema = mongoose.Schema;
 let egresoSchema = new Schema({
     descripcion: {
         type: String,
-        required: [true, 'La descripcion es requerido']
     },
     valor: {
         type: Number,

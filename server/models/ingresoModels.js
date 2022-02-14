@@ -5,8 +5,6 @@ let Schema = mongoose.Schema;
 let ingresoSchema = Schema({
     descripcion: {
         type: String,
-        unique: true,
-        required: [true, 'La descripcion es requerido']
     },
     valor: {
         type: Number,
