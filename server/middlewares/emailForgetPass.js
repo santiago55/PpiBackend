@@ -3,22 +3,42 @@ const email = {
     user: 'financecontrolppi@gmail.com',
     pass: '12345ppi'
 };
-let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    host: "smtp.gmail.com",
-    port: 587,
-    secure: false,
-    auth: {
-        user: email.user,
-        pass: email.pass,
-    },
-    tls: {
-        rejectUnauthorized: false
-    }
-});
+const client_id ="751918155457-8ep3cv6s6gl0l9vbdbun2rvv0tuc3j70.apps.googleusercontent.com";
+const client_secret="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";
+const redirect_uri="https://developers.google.com/oauthplayground";
+const REFRESH_TOKEN="1//04ab_x2UtfanbCgYIARAAGAQSNwF-L9IrN4Hc8Lfw8eCSYeY0BBc2Pc0bEkrviDM5EnDVtch99GdeaCQb_m92Cg4GhtBKdId_5-M";
+const oAuth2Client = new google.auth.OAuth2(
+    client_id,
+    client_secret,
+    redirect_uri
+    );
+
+oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN});
 
 const sendEmailForgetPass = async (mail, asunto, html) => {
     try {
+
+        const accessToken = await oAuth2Client.getAccessToken();
+        let transporter = nodemailer.createTransport({
+            service: 'gmail',
+            //host: "smtp.gmail.com",
+            //port: 587,
+            //secure: false,
+            auth: {
+                type:"OAuth2",
+                user: email.user,
+                clientId: client_id,
+                clientSecret: client_secret,
+                refreshToken: REFRESH_TOKEN,
+                accessToken: accessToken
+                //user: email.user,
+                //pass: email.pass,
+            },
+            tls: {
+                rejectUnauthorized: false
+            }
+        });
+
         await transporter.sendMail({
             from: `Finance Control ${email.user}`, // sender address
             to: mail, // list of receivers
@@ -40,7 +60,7 @@ const getTemplateForgetPass = (name, token) => {
     <h2>Hola ${name}</h2>
     <p>Para cambiar tu contraseña ingresa en el siguiente enlace: </p>
     <a
-        href="http://localhost:3000/CambiarContraseñaCorreo/${token}"
+        href="https://ppi-vista.vercel.app/CambiarContraseñaCorreo/${token}"
         target="_blank"
     >Confirmar Cuenta</a>
 </div>`

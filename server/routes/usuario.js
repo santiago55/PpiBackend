@@ -42,7 +42,7 @@ app.post('/user', (req, res) => {
                 err
             });
         }
-        await sendEmail(mailed, 'Email de prueba', template);
+        await sendEmail(mailed, 'Confirmación de Usuario', template);
         res.status(200).json({
             ok: true,
             user: usuarioDB
