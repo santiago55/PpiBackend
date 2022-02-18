@@ -60,7 +60,7 @@ const getTemplate = (name, token) => {
     <h2>Hola ${name}</h2>
     <p>Para confirmar tu cuenta, ingresa al siguiente enlace</p>
     <a
-        href="http://localhost:3001/user/confirm/${token}"
+        href="https://ppi-vista.vercel.app/user/confirm/${token}"
         target="_blank"
     >Confirmar Cuenta</a>
 </div>`
