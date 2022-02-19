@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 
 let ingresoSchema = Schema({
     descripcion: {
-        type: String,
+        type: String
     },
     valor: {
         type: Number,

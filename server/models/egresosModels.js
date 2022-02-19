@@ -4,7 +4,7 @@ let Schema = mongoose.Schema;
 
 let egresoSchema = new Schema({
     descripcion: {
-        type: String,
+        type: String
     },
     valor: {
         type: Number,
