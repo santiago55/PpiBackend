@@ -11,9 +11,6 @@ let ahorroSchema = Schema({
         type: Number,
         required: [true, 'El precio es requerido']
     },
-    categoria: {
-        type: String
-    },
     date: {
         type: Date,
         required: [true, 'la fecha es necesaria']
