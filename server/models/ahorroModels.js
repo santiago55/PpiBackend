@@ -5,7 +5,6 @@ let Schema = mongoose.Schema;
 let ahorroSchema = Schema({
     descripcion: {
         type: String,
-        unique: true,
         required: [true, 'La descripcion es requerido']
     },
     valor: {
