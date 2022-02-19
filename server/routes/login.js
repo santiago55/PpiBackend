@@ -16,14 +16,16 @@ app.post('/login', (req, res) => {
         if (!usuarioBD) {
             return res.status(400).json({
                 ok: false,
-                message: 'Usuario o contraseña incorrectos'
+                message: 'Usuario o contraseña incorrectos',
+                err
             });
         }
 
         if (usuarioBD.password !== body.password) {
             return res.status(400).json({
                 ok: false,
-                message: 'Usuario o contraseña incorrectos'
+                message: 'Usuario o contraseña incorrectos',
+                err
             });
         }
         if (usuarioBD.status === 'Activo') {
@@ -39,7 +41,8 @@ app.post('/login', (req, res) => {
         } else {
             return res.status(401).json({
                 ok: false,
-                message: 'El usuario no esta activo'
+                message: 'El usuario no esta activo',
+                err
             });
         }
     });
