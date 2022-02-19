@@ -63,7 +63,7 @@ const getTemplateForgetPass = (name, token) => {
     <a
         href="https://ppi-vista.vercel.app/CambiarContraseñaCorreo/${token}"
         target="_blank"
-    >Confirmar Cuenta</a>
+    >Cambiar contraseña</a>
 </div>`
 }
 
