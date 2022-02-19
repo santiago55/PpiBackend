@@ -73,7 +73,7 @@ app.get('/user/confirm/:token', async (req, res) => {
             }
             usuarioBD.status = 'Activo';
             usuarioBD.save();
-            return res.redirect('/confirm.html');
+            return res.redirect('https://ppi-vista.vercel.app/');
         });
 
 
