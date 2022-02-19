@@ -43,7 +43,6 @@ app.post('/ahorros', [validarToken], async (req, res) => {
     let ahorros = new ahorro({
         descripcion: body.descripcion,
         valor: body.valor,
-        categoria: body.categoria,
         date: body.date,
         usuario: req.data._id
     });
